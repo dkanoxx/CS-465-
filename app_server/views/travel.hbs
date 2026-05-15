@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{title}}</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>{{pageHeader}}</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Length</th>
+                <th>Start</th>
+                <th>Resort</th>
+                <th>Per Person</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {{#each trips}}
+            <tr>
+                <td>{{this.code}}</td>
+                <td>{{this.name}}</td>
+                <td>{{this.length}}</td>
+                <td>{{this.start}}</td>
+                <td>{{this.resort}}</td>
+                <td>{{this.perPerson}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+
+</body>
+</html>
