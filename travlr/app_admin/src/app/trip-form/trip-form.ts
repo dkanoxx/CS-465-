@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TripData } from '../services/trip-data';
+import { Trip } from '../models/trip';
 
 @Component({
   selector: 'app-trip-form',
@@ -12,7 +13,7 @@ export class TripForm {
 
   private tripService = inject(TripData);
 
-  trip:any = {
+  trip: Trip = {
     code: '',
     name: '',
     length: '',
@@ -24,9 +25,15 @@ export class TripForm {
   };
 
   addTrip() {
-    this.tripService.addTrip(this.trip).subscribe(() => {
-      alert('Trip added successfully');
-      window.location.reload();
+    this.tripService.addTrip(this.trip).subscribe({
+      next: () => {
+        alert('Trip added successfully');
+        window.location.reload();
+      },
+      error: (err) => {
+        console.log(err);
+        alert('Error adding trip. Check that all fields are completed and the trip code is unique.');
+      }
     });
   }
 }

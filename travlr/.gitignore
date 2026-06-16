@@ -1,2 +1,6 @@
-.vs/ 
-node_modules/ 
+node_modules/
+app_admin/node_modules/
+app_admin/.angular/
+.vs/
+.DS_Store
+*.zip

@@ -1,13 +1,15 @@
 <h2>Trips</h2>
 
-@if (errorMessage) {
-  <p style="color:red;">{{ errorMessage }}</p>
-}
+<div *ngIf="loading">
+  Loading trips...
+</div>
 
-@if (!errorMessage && trips.length === 0) {
-  <p>Loading trips...</p>
-}
+<div *ngIf="!loading">
 
-@for (trip of trips; track trip.code) {
-  <app-trip-card [trip]="trip"></app-trip-card>
-}
+  <app-trip-card *ngFor="let trip of trips"
+                 [trip]="trip"
+                 (tripUpdated)="refreshTrips()"
+                 (tripDeleted)="refreshTrips()">
+  </app-trip-card>
+
+</div>

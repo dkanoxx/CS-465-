@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Trip } from '../models/trip';
 
 @Injectable({
   providedIn: 'root'
@@ -11,23 +12,23 @@ export class TripData {
 
   constructor(private http: HttpClient) {}
 
-  getTrips(): Observable<any> {
-    return this.http.get(this.apiUrl);
+  getTrips(): Observable<Trip[]> {
+    return this.http.get<Trip[]>(this.apiUrl);
   }
 
-  getTrip(code: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}/${code}`);
+  getTrip(code: string): Observable<Trip> {
+    return this.http.get<Trip>(`${this.apiUrl}/${code}`);
   }
 
-  addTrip(trip: any): Observable<any> {
-    return this.http.post(this.apiUrl, trip);
+  addTrip(trip: Trip): Observable<Trip> {
+    return this.http.post<Trip>(this.apiUrl, trip);
   }
 
-  updateTrip(code: string, trip: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/${code}`, trip);
+  updateTrip(code: string, trip: Trip): Observable<Trip> {
+    return this.http.put<Trip>(`${this.apiUrl}/${code}`, trip);
   }
 
-  deleteTrip(code: string): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/${code}`);
+  deleteTrip(code: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${code}`);
   }
 }

@@ -4,14 +4,14 @@ const router = express.Router();
 const ctrlTrips = require('../controllers/trips');
 
 router
-    .route('/trips')
-    .get(ctrlTrips.tripsList)
-    .post(ctrlTrips.tripsAddTrip);
+  .route('/trips')
+  .get(ctrlTrips.tripsList)
+  .post(ctrlTrips.tripsAddTrip);
 
 router
-    .route('/trips/:tripCode')
-    .get(ctrlTrips.tripsReadOne)
-    .put(ctrlTrips.tripsUpdateOne)
-    .delete(ctrlTrips.tripsDeleteOne);
+  .route('/trips/:tripCode')
+  .get(ctrlTrips.tripsReadOne)
+  .put(ctrlTrips.tripsUpdateOne)
+  .delete(ctrlTrips.tripsDeleteOne);
 
 module.exports = router;

@@ -1,29 +1,38 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TripCard } from '../trip-card/trip-card';
 import { TripData } from '../services/trip-data';
+import { TripCard } from '../trip-card/trip-card';
 
 @Component({
   selector: 'app-trip-list',
+  standalone: true,
   imports: [CommonModule, TripCard],
   templateUrl: './trip-list.html',
-  styleUrl: './trip-list.css'
+  styleUrls: ['./trip-list.css']
 })
-export class TripList {
+export class TripList implements OnInit {
+
   trips: any[] = [];
-  errorMessage = '';
+  loading = true;
 
-  private tripService = inject(TripData);
+  constructor(private tripService: TripData) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.tripService.getTrips().subscribe({
       next: (data: any) => {
         this.trips = data;
+        this.loading = false;
       },
       error: (err) => {
-        this.errorMessage = err.message;
-        console.log(err);
+        console.error(err);
+        this.loading = false;
       }
+    });
+  }
+
+  refreshTrips() {
+    this.tripService.getTrips().subscribe((data:any)=>{
+      this.trips=data;
     });
   }
 }

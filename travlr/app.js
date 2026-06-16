@@ -1,12 +1,23 @@
 const express = require('express');
 const path = require('path');
 const hbs = require('hbs');
-const cors = require('cors');
 require('./app_server/models/db');
 
 const app = express();
 
-app.use(cors());
+// Allow Angular admin app running on localhost:4200 to call the API on localhost:3000.
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', 'http://localhost:4200');
+    res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+
+    if (req.method === 'OPTIONS') {
+        return res.sendStatus(200);
+    }
+
+    next();
+});
+
 app.use(express.json());
 
 app.set('view engine', 'hbs');
