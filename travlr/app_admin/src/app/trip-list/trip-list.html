@@ -1,0 +1,13 @@
+<h2>Trips</h2>
+
+@if (errorMessage) {
+  <p style="color:red;">{{ errorMessage }}</p>
+}
+
+@if (!errorMessage && trips.length === 0) {
+  <p>Loading trips...</p>
+}
+
+@for (trip of trips; track trip.code) {
+  <app-trip-card [trip]="trip"></app-trip-card>
+}
