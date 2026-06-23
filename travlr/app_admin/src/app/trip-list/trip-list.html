@@ -4,12 +4,17 @@
   Loading trips...
 </div>
 
-<div *ngIf="!loading">
+<div *ngIf="errorMessage" class="alert alert-danger">
+  {{ errorMessage }}
+</div>
 
-  <app-trip-card *ngFor="let trip of trips"
-                 [trip]="trip"
-                 (tripUpdated)="refreshTrips()"
-                 (tripDeleted)="refreshTrips()">
+<div *ngIf="!loading && !errorMessage">
+
+  <app-trip-card
+    *ngFor="let trip of trips"
+    [trip]="trip"
+    (tripUpdated)="refreshTrips()"
+    (tripDeleted)="refreshTrips()">
   </app-trip-card>
 
 </div>

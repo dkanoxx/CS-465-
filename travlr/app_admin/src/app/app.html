@@ -2,8 +2,18 @@
 
   <h1>Travlr Getaways Admin</h1>
 
-  <app-trip-form></app-trip-form>
+  <div *ngIf="!loggedIn()">
+    <app-login></app-login>
+  </div>
 
-  <app-trip-list></app-trip-list>
+  <div *ngIf="loggedIn()">
+    <button class="btn btn-outline-danger mb-3" type="button" (click)="logout()">
+      Logout
+    </button>
+
+    <app-trip-form></app-trip-form>
+
+    <app-trip-list></app-trip-list>
+  </div>
 
 </div>

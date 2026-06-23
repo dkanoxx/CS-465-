@@ -5,17 +5,17 @@ require('./app_server/models/db');
 
 const app = express();
 
-// Allow Angular admin app running on localhost:4200 to call the API on localhost:3000.
+// Allow the Angular admin app running on localhost:4200 to call the API on localhost:3000.
 app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', 'http://localhost:4200');
-    res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  res.header('Access-Control-Allow-Origin', 'http://localhost:4200');
+  res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
 
-    if (req.method === 'OPTIONS') {
-        return res.sendStatus(200);
-    }
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(200);
+  }
 
-    next();
+  next();
 });
 
 app.use(express.json());
@@ -35,5 +35,5 @@ app.use('/api', apiRoutes);
 const port = 3000;
 
 app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
+  console.log(`Server running on port ${port}`);
 });
